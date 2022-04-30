@@ -15,7 +15,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
  function isMAC48Address(n) {
-   //throw new NotImplementedError('Not implemented');
    n = n.split('-');
    if(n.length < 6) return false;
    const sos = /[g-z]/;

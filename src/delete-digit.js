@@ -12,7 +12,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function deleteDigit(n) {
-   throw new NotImplementedError('Not implemented');
    n = n + '';
    let max = 0;
    for (let i = 0; i < n.length; i++) {
