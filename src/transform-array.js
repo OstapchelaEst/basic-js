@@ -13,32 +13,38 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
- function transform(arr) {
-   throw new NotImplementedError('Not implemented');
-   for (let i = 0; i < arr.length; i++) {
-     if (typeof(arr[i]) == 'string') {
-       let newRull = arr[i].split('-').splice(2, 2);
-       console.log(newRull);
-       if (newRull[0] == 'discard') {
-         if (newRull[1] = 'next') {
-           arr.splice(i, 2);
-           i -= 2;
-         } else if (newRull[1] = 'prev') {
-           console.log('aaaaa');
-           arr.splice(i - 1, 2);
-           i -= 2;
+function transform(arr) {
+   //throw new NotImplementedError('Not implemented');
+   if (!Array.isArray(arr)) throw Error("\'arr\' parameter must be an instance of the Array!");
+   let resultArray = Array.from(arr);
+
+   for (let i = 0; i < resultArray.length; i++) {
+      if (typeof (resultArray[i]) == 'string') {
+         let newRull = resultArray[i].split('-').splice(2, 2);
+         if (newRull[0] == 'discard') {
+            if (newRull[1] == 'next') {
+               resultArray[i + 1] = '';
+               resultArray[i] = '';
+            }
+            else {
+               resultArray[i - 1] = '';
+               resultArray[i] = '';
+            }
          }
-       } else {
-         if (newRull[1] = 'next') {
-           arr[i] = arr[i + 1];
-         } else if (newRull[1] = 'prev') {
-           arr[i] = arr[i + -1];
+         if (newRull[0] == 'double') {
+            if (newRull[1] == 'next') {
+               resultArray[i] = resultArray[i + 1];
+            }
+            else {
+               resultArray[i] = resultArray[i - 1];
+            }
          }
-       }
-     }
+      }
    }
-   return arr;
- }
+   return resultArray = resultArray.filter((a) => {
+      if (typeof (a) != null) return a
+   });
+}
 
 module.exports = {
    transform
